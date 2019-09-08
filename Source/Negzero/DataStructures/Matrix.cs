@@ -1,3 +1,6 @@
+using System;
+using System.Collections.ObjectModel;
+
 namespace Negzero.DataStructures
 {
     public class Matrix
@@ -11,6 +14,17 @@ namespace Negzero.DataStructures
             Height = height;
             Width = width;
             _matrix = new byte[Height * Width];
+        }
+
+
+        public byte this[(int x, int y) point]
+        {
+            get => _matrix[point.x * Width + point.y];
+            set => _matrix[point.x * Width + point.y] = value;
+        }
+
+        public ReadOnlyCollection<byte> ToArray() {
+            return Array.AsReadOnly(_matrix);
         }
     }
 }
