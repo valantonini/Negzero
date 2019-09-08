@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: 2.2.0
+dist: trusty
+script:
+ - cd ./Source
+ - dotnet restore
+ - dotnet build
+ - dotnet test
