@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negzero", "Negzero\Negzero.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negzero.Tests", "Negzero.Tests\Negzero.Tests.csproj", "{C75E0FE5-0D3F-49C4-9198-6C7473A5A341}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negzero.Console", "Negzero.Console\Negzero.Console.csproj", "{AE76EC84-06CE-423E-B8CA-B1C49F03F833}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{C75E0FE5-0D3F-49C4-9198-6C7473A5A341}.Release|x64.Build.0 = Release|Any CPU
 		{C75E0FE5-0D3F-49C4-9198-6C7473A5A341}.Release|x86.ActiveCfg = Release|Any CPU
 		{C75E0FE5-0D3F-49C4-9198-6C7473A5A341}.Release|x86.Build.0 = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|x64.Build.0 = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE76EC84-06CE-423E-B8CA-B1C49F03F833}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
