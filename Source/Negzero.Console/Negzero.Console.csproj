@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Negzero\Negzero.csproj" />
+    <ProjectReference Include="..\Negzero.BitmapRenderer\Negzero.BitmapRenderer.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

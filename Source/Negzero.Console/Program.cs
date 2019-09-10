@@ -2,6 +2,7 @@
 using Negzero;
 using Negzero.DataStructures.Matrix;
 using Negzero.DataStructures.Matrix.Renderers;
+using Negzero.BitmapRenderer;
 
 namespace Negzero.Console
 {
@@ -12,16 +13,7 @@ namespace Negzero.Console
             var matrix = new Matrix(4,5);
             matrix[(2,2)] = 1;
 
-            using (var memoryStream = new System.IO.MemoryStream())
-            using(var streamwriter = new System.IO.StreamWriter(memoryStream))
-            {
-                matrix.Render(new StreamRenderer(4,5, streamwriter));
-                
-                memoryStream.Position = 0;
-                var reader = new System.IO.StreamReader(memoryStream);
-                System.Console.WriteLine(reader.ReadToEnd());
-            }
-
+            matrix.Render(new Renderer(4,5, "/Users/val/tmp/dungeon2.png"));
         }
     }
 }

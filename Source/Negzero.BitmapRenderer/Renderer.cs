@@ -2,11 +2,11 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using Negzero.DataStructures.Matrix.Renderers;
 
-namespace Negzero.DataStructures.Matrix.Renderers
+namespace Negzero.BitmapRenderer
 {
-    // ToDo: move this out to seperate project to remove dependency on System.Drawing.Common package
-    public class BitmapRenderer : IRenderMatrix
+    public class Renderer : IRenderMatrix
     {
         private readonly int _height;
         private readonly int _width;
@@ -15,7 +15,7 @@ namespace Negzero.DataStructures.Matrix.Renderers
         private readonly string _filename;
         private const int TILE_SIZE = 16;
         
-        public BitmapRenderer(int height, int width, string filename)
+        public Renderer(int height, int width, string filename)
         {
             _height = height;
             _width = width;
