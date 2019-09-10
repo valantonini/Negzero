@@ -1,14 +1,15 @@
 using NUnit.Framework;
 using FluentAssertions;
+using Negzero.DataStructures.Matrix;
 
-namespace Negzero.DataStructures.Matrix.Tests
+namespace Negzero.Tests.DataStructures
 {
-    public class MatrixTest
+    public class ByteMatrixTest
     {
         [Test]
         public void ShouldInstantiateAMatrix()
         {
-            var matrix = new Matrix(4, 5);
+            var matrix = new ByteMatrix(4, 5);
 
             matrix.Height.Should().Be(4);
             matrix.Width.Should().Be(5);
@@ -17,7 +18,7 @@ namespace Negzero.DataStructures.Matrix.Tests
         [Test]
         public void ShouldSet2dCoordinates()
         {
-            var matrix = new Matrix(3, 3);
+            var matrix = new ByteMatrix(3, 3);
 
             byte index = 0;
             for (var x = 0; x < 3; x++)

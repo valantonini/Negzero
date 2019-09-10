@@ -10,7 +10,7 @@ namespace Negzero.Console
     {
         static void Main(string[] args)
         {
-            var matrix = new Matrix(4,5);
+            var matrix = new ByteMatrix(4,5);
             matrix[(2,2)] = 1;
 
             matrix.Render(new Renderer(4,5, "/Users/val/tmp/dungeon2.png"));

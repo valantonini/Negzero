@@ -4,13 +4,13 @@ using Negzero.DataStructures.Matrix.Renderers;
 
 namespace Negzero.DataStructures.Matrix
 {
-    public class Matrix
+    public class ByteMatrix
     {
         private readonly byte[] _matrix;
         public int Height { get; private set; }
         public int Width { get; private set; }
 
-        public Matrix(int height, int width)
+        public ByteMatrix(int height, int width)
         {
             Height = height;
             Width = width;
