@@ -11,7 +11,7 @@ namespace Negzero.Console
         {
             var matrix = new Matrix(4,5);
             matrix[(2,2)] = 1;
-            matrix.Render(new ConsoleRenderer(4,5));
+            matrix.Render(new BitmapRenderer(4,5, "/Users/val/tmp/dungeon.png"));
         }
     }
 }

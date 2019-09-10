@@ -4,8 +4,8 @@ namespace Negzero.DataStructures.Matrix.Renderers
 {
     public class ConsoleRenderer : IRenderMatrix
     {
-        protected readonly int _height;
-        protected readonly int _width;
+        private readonly int _height;
+        private readonly int _width;
         public ConsoleRenderer(int height, int width)
         {
             _height = height;
