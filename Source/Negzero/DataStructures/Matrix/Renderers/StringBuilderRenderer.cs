@@ -2,12 +2,12 @@ using System.Text;
 
 namespace Negzero.DataStructures.Matrix.Renderers
 {
-    public class StringRenderer : IRenderMatrix
+    public class StringBuilderRenderer : IRenderMatrix
     {
         private readonly int _height;
         private readonly int _width;
         private StringBuilder _stringBuilder;
-        public StringRenderer(int height, int width, StringBuilder stringBuilder)
+        public StringBuilderRenderer(int height, int width, StringBuilder stringBuilder)
         {
             _height = height;
             _width = width;
