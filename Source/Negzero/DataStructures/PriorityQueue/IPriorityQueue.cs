@@ -2,8 +2,8 @@ namespace Negzero.DataStructures.PriorityQueue
 {
     public interface IPriorityQueue<T>
     {
-        int Queue(T item);
-        T Dequeue();
+        void Push(T item);
+        T PopMin();
         T Peek();
 
         void Clear();
