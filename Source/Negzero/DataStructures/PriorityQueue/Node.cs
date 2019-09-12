@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Negzero.DataStructures.PriorityQueue
 {
     public class Node<T>
@@ -9,5 +11,7 @@ namespace Negzero.DataStructures.PriorityQueue
         {
             Value = value;
         }
+        private IList<Node<T>> _children = new List<Node<T>>();
+        private Node<T> _parent = null;
     }
 }

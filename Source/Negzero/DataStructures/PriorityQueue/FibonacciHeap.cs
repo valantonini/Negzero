@@ -7,6 +7,7 @@ namespace Negzero.DataStructures.PriorityQueue
         private readonly IComparer<T> _comparer;
         private Node<T> _min = null;
         private IList<Node<T>> _roots = new List<Node<T>>();
+
         public int Count { get; private set; }
 
         public FibonacciHeap() : this(Comparer<T>.Default) { }
@@ -53,20 +54,25 @@ namespace Negzero.DataStructures.PriorityQueue
                 }
             }
 
-            var returnValue = _min.Value;
+            var oldMin = _min;
             _min = newMin;
+
+            _roots.Remove(oldMin);
             Count--;
-            return returnValue;
+
+            return oldMin.Value;
         }
 
         public void Push(T item)
         {
             var node = new Node<T>(item);
             _roots.Add(node);
+
             if (_min == null || _comparer.Compare(node.Value, _min.Value) < 0)
             {
                 _min = node;
             }
+
             Count++;
         }
     }
