@@ -60,6 +60,11 @@ namespace Negzero.DataStructures.PriorityQueue
             _roots.Remove(oldMin);
             Count--;
 
+            if (Count > 1)
+            {
+                Merge();
+            }
+
             return oldMin.Value;
         }
 
@@ -74,6 +79,11 @@ namespace Negzero.DataStructures.PriorityQueue
             }
 
             Count++;
+        }
+
+        private void Merge()
+        {
+
         }
     }
 }
