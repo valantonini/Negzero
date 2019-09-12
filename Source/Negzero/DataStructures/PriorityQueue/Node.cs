@@ -44,7 +44,9 @@ namespace Negzero.DataStructures.PriorityQueue
         {
             child.Parent = this;
             _children.Add(child);
-            RecalculateHeight();
+            if (child.Height + 1 > Height) {
+                Height = child.Height + 1;
+            }
         }
 
         public void RemoveChild(Node<T> child)
@@ -67,5 +69,6 @@ namespace Negzero.DataStructures.PriorityQueue
         {
             RecalculateHeight();
         }
+
     }
 }

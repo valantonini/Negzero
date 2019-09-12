@@ -105,31 +105,53 @@ namespace Negzero.Tests.DataStructures
         [Test]
         public void ShouldTrackRelationship_OnRemoval()
         {
-            var parent = Substitute.ForPartsOf<Node<int>>(9);
+            var n1 = Substitute.ForPartsOf<Node<int>>(9);
             
-            var child = Substitute.ForPartsOf<Node<int>>(7);
+            var n1_1 = Substitute.ForPartsOf<Node<int>>(7);
             
-            var grandchild1 = Substitute.ForPartsOf<Node<int>>(6);
-            var grandchild2 = Substitute.ForPartsOf<Node<int>>(3);
+            var n1_1_1 = Substitute.ForPartsOf<Node<int>>(6);
+            var n1_1_2 = Substitute.ForPartsOf<Node<int>>(3);
             
-            var greatGrandchild = Substitute.ForPartsOf<Node<int>>(1);
+            var n1_1_2_1 = Substitute.ForPartsOf<Node<int>>(1);
 
-            parent.AddChild(child);
+            n1.AddChild(n1_1);
             
-            child.AddChild(grandchild1);
-            child.AddChild(grandchild2);
+            n1_1.AddChild(n1_1_1);
+            n1_1.AddChild(n1_1_2);
 
-            grandchild2.AddChild(greatGrandchild);
+            n1_1_2.AddChild(n1_1_2_1);
 
-            grandchild2.RemoveChild(greatGrandchild);
+            n1_1_2.RemoveChild(n1_1_2_1);
 
+            n1_1_2_1.Parent.Should().BeNull();
+            n1_1_1.Parent.Should().Be(n1_1);
+            n1_1_2.Parent.Should().Be(n1_1);
+            n1_1.Parent.Should().Be(n1);
+        }
 
-            greatGrandchild.Parent.Should().BeNull();
-
-            grandchild1.Parent.Should().Be(child);
-            grandchild2.Parent.Should().Be(child);
+        [Test]
+        public void ShouldTrackHeight_RecalOnMerge()
+        {
+            var n1 = Substitute.ForPartsOf<Node<int>>(9);
             
-            child.Parent.Should().Be(parent);
+            var n1_1 = Substitute.ForPartsOf<Node<int>>(7);
+            
+            var n1_1_1 = Substitute.ForPartsOf<Node<int>>(6);
+            var n1_1_2 = Substitute.ForPartsOf<Node<int>>(3);
+            
+            var n2 = Substitute.ForPartsOf<Node<int>>(1);
+            var n2_1 = Substitute.ForPartsOf<Node<int>>(1);
+
+            n1.AddChild(n1_1);
+            
+            n1_1.AddChild(n1_1_1);
+            n1_1.AddChild(n1_1_2);
+
+            n2.AddChild(n2_1);
+
+            n1_1_2.AddChild(n2);
+
+            n1.Height.Should().Be(4);
         }
     }
 }
