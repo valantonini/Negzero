@@ -4,6 +4,11 @@ using Negzero.DataStructures.Matrix;
 using Negzero.DataStructures.Matrix.Renderers;
 using Negzero.BitmapRenderer;
 using Negzero.DataStructures.PriorityQueue;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Diagnostics;
 
 namespace Negzero.Console
 {
@@ -11,19 +16,50 @@ namespace Negzero.Console
     {
         static void Main(string[] args)
         {
-            // var matrix = new ByteMatrix(4,5);
-            // matrix[(2,2)] = 1;
+            var mod = 10000;
+            var random = new Random(123);
 
-            // matrix.Render(new Renderer(4,5, "/Users/val/tmp/dungeon2.png"));
-            var heap = new FibonacciHeap<byte>();
-            foreach(var item in new byte[]{ 5, 2}) 
+            var numbers = Enumerable
+                            .Range(0, 100000)
+                            .Select( _ => random.Next(1, 1000000))
+                            .Distinct()
+                            .ToList();
+
+            var timer = Stopwatch.StartNew();
+            var heap = new FibonacciHeap<int>();
+            for (var i = 0; i < numbers.Count; i++)
             {
-                heap.Push(item);    
+                heap.Push(numbers[i]);  
+                if (i % mod == 0) {
+                    heap.PopMin();
+                }  
             }
-            for (var i = 0; i < heap.Count; i++) 
+            timer.Stop();
+            System.Console.WriteLine($"Heap: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
+
+            timer = Stopwatch.StartNew();
+            var list = new List<int>();
+            for (var i = 0; i < numbers.Count; i++)
             {
-                heap.PopMin();
+                list.Add(numbers[i]);  
+                if (i % mod == 0) {
+                    list.Remove(list.Min());
+                }  
             }
+            timer.Stop();
+            System.Console.WriteLine($"List: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
+
+            timer = Stopwatch.StartNew();
+            var queueB = new PriorityQueueB<int>();
+            for (var i = 0; i < numbers.Count; i++)
+            {
+                queueB.Push(numbers[i]);  
+                if (i % mod == 0) {
+                    queueB.PopMin();
+                }  
+            }
+            timer.Stop();
+            System.Console.WriteLine($"Queue: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
         }
     }
 }
