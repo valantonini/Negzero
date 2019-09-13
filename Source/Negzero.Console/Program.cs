@@ -16,11 +16,14 @@ namespace Negzero.Console
     {
         static void Main(string[] args)
         {
+            
+            System.Console.WriteLine();
+
             var mod = 10000;
             var random = new Random(123);
 
             var numbers = Enumerable
-                            .Range(0, 100000)
+                            .Range(0, 200000)
                             .Select( _ => random.Next(1, 1000000))
                             .Distinct()
                             .ToList();
@@ -35,19 +38,20 @@ namespace Negzero.Console
                 }  
             }
             timer.Stop();
-            System.Console.WriteLine($"Heap: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
+            var heapElapsed = timer.ElapsedMilliseconds;
+            System.Console.WriteLine($"Heap: {numbers.Count} processed in {heapElapsed}ms");
 
-            timer = Stopwatch.StartNew();
-            var list = new List<int>();
-            for (var i = 0; i < numbers.Count; i++)
-            {
-                list.Add(numbers[i]);  
-                if (i % mod == 0) {
-                    list.Remove(list.Min());
-                }  
-            }
-            timer.Stop();
-            System.Console.WriteLine($"List: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
+            // timer = Stopwatch.StartNew();
+            // var list = new List<int>();
+            // for (var i = 0; i < numbers.Count; i++)
+            // {
+            //     list.Add(numbers[i]);  
+            //     if (i % mod == 0) {
+            //         list.Remove(list.Min());
+            //     }  
+            // }
+            // timer.Stop();
+            // System.Console.WriteLine($"List: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
 
             timer = Stopwatch.StartNew();
             var queueB = new PriorityQueueB<int>();
@@ -59,7 +63,12 @@ namespace Negzero.Console
                 }  
             }
             timer.Stop();
-            System.Console.WriteLine($"Queue: {numbers.Count} processed in {timer.ElapsedMilliseconds}ms");
+            var queueElapsed = timer.ElapsedMilliseconds;
+            System.Console.WriteLine($"Queue: {numbers.Count} processed in {queueElapsed}ms");
+
+            System.Console.WriteLine();
+            System.Console.WriteLine($"variance {heapElapsed - queueElapsed}ms ({heapElapsed / queueElapsed * 100}%)");
+            System.Console.WriteLine();
         }
     }
 }
