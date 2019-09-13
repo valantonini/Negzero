@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Negzero.DataStructures.PriorityQueue
@@ -6,7 +7,7 @@ namespace Negzero.DataStructures.PriorityQueue
     {
         private readonly IComparer<T> _comparer;
         private Node<T> _min = null;
-        private IList<Node<T>> _roots = new List<Node<T>>();
+        private List<Node<T>> _roots = new List<Node<T>>();
 
         public int Count { get; private set; }
 
@@ -41,29 +42,17 @@ namespace Negzero.DataStructures.PriorityQueue
                 throw new System.NullReferenceException("No values in heap");
             }
 
-            Node<T> newMin = null;
-            foreach(var newMinCandidate in _roots) 
-            {
-                if(_min == newMinCandidate) 
-                {
-                    continue;
-                }
-
-                if(newMin == null || _comparer.Compare(newMinCandidate.Value, newMin.Value) < 0){
-                    newMin = newMinCandidate;
-                }
-            }
-
             var oldMin = _min;
-            _min = newMin;
-
             _roots.Remove(oldMin);
+            _roots.AddRange(oldMin.DetachChildren());
+
             Count--;
 
-            if (Count > 1)
-            {
-                Merge();
-            }
+            var ( newRoots, newMin ) = Merge();
+
+            _roots = newRoots;
+            _min = newMin;
+            
 
             return oldMin.Value;
         }
@@ -81,9 +70,44 @@ namespace Negzero.DataStructures.PriorityQueue
             Count++;
         }
 
-        private void Merge()
+        private (List<Node<T>> roots, Node<T> min) Merge()
         {
+            var heightMap = new Dictionary<int, Node<T>>();
+            Node<T> min = null;
+            for (var i = 0; i < _roots.Count; i++)
+            {
+                Node<T> next = _roots[i];
 
+                if(min == null || _comparer.Compare(next.Value, min.Value) < 0)
+                {
+                    min = next;
+                }
+                
+                while(next != null) 
+                {
+                    var height = next.Height;
+                    if(!heightMap.ContainsKey(height))
+                    {
+                        heightMap[next.Height] = next;
+                        next = null;
+                    }
+                    else
+                    {
+                        var nodeToMergeWith = heightMap[height];
+                        heightMap.Remove(height);
+
+                        var nodes = _comparer.Compare(next.Value, nodeToMergeWith.Value) < 0 
+                                        ? (smaller: next, larger: nodeToMergeWith)
+                                        : (smaller: nodeToMergeWith, larger: next);
+
+                        nodes.larger.DetachFromParent();
+                        nodes.smaller.AddChild(nodes.larger);
+                        next = nodes.smaller;
+                    }
+
+                }
+            }
+            return ( roots: heightMap.Values.ToList(), min: min );
         }
     }
 }

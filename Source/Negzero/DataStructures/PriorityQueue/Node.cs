@@ -56,6 +56,32 @@ namespace Negzero.DataStructures.PriorityQueue
             child.Parent = null;
         }
 
+        public void DetachFromParent()
+        {
+            if (_parent == null) 
+            {
+                return;
+            }
+
+            this._parent.RemoveChild(this);
+        }
+
+        public List<Node<T>> DetachChildren()
+        {
+            var children = new List<Node<T>>();
+
+            foreach(var child in _children) {
+                child.Parent = null;
+                children.Add(child);
+            }
+
+            _children.Clear();
+
+            Height = 0;
+
+            return children;
+        }
+
         private void RecalculateHeight()
         {
             var newHeight = _children.Count == 0 ? 0 : _children.Max(child => child.Height) + 1;
