@@ -21,7 +21,7 @@ namespace Negzero.DataStructures.PriorityQueue
         public void Clear()
         {
             _min = null;
-            _roots = new List<Node<T>>();
+            _roots.Clear();
             Count = 0;
         }
 
@@ -48,7 +48,7 @@ namespace Negzero.DataStructures.PriorityQueue
 
             Count--;
 
-            var ( newRoots, newMin ) = Merge();
+            var ( newRoots, newMin ) = MergeRootNodes(_roots, _comparer);
 
             _roots = newRoots;
             _min = newMin;
@@ -70,15 +70,14 @@ namespace Negzero.DataStructures.PriorityQueue
             Count++;
         }
 
-        private (List<Node<T>> roots, Node<T> min) Merge()
+        public static (List<Node<T>> roots, Node<T> min) MergeRootNodes(List<Node<T>> rootNodes, IComparer<T> comparer)
         {
             var heightMap = new Dictionary<int, Node<T>>();
             Node<T> min = null;
-            for (var i = 0; i < _roots.Count; i++)
+            for (var i = 0; i < rootNodes.Count; i++)
             {
-                Node<T> next = _roots[i];
-
-                if(min == null || _comparer.Compare(next.Value, min.Value) < 0)
+                Node<T> next = rootNodes[i];
+                if(min == null || comparer.Compare(next.Value, min.Value) < 0)
                 {
                     min = next;
                 }
@@ -96,7 +95,7 @@ namespace Negzero.DataStructures.PriorityQueue
                         var nodeToMergeWith = heightMap[height];
                         heightMap.Remove(height);
 
-                        var nodes = _comparer.Compare(next.Value, nodeToMergeWith.Value) < 0 
+                        var nodes = comparer.Compare(next.Value, nodeToMergeWith.Value) < 0 
                                         ? (smaller: next, larger: nodeToMergeWith)
                                         : (smaller: nodeToMergeWith, larger: next);
 

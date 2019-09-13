@@ -108,5 +108,36 @@ namespace Negzero.Tests.DataStructures
                 }
             }
         }
+
+        [TestCase(3, 1, new int[]{ 3, 5 }, new int[] { 4, 6 })]
+        [TestCase(3, 1, new int[]{ 4, 6 }, new int[] { 3, 5 })]
+        [TestCase(1, 2, new int[]{ 4, 6 }, new int[] { 3, 5 }, new int[] { 1, 9 })]
+        public void ShouldMergeRootNode(int minValue, int numberOfTrees, params int[][] trees)
+        {
+            var rootNodes = new List<Node<int>>();
+
+            foreach(var tree in trees)
+            {
+                Node<int> lastNode = null;
+                for(var i = 0; i < tree.Length; i++)
+                {
+                    var node = new Node<int>(tree[i]);
+                    if (lastNode == null)
+                    {
+                        lastNode = node;
+                        rootNodes.Add(node);
+                    }
+                    else {
+                        lastNode.AddChild(node);
+                        lastNode = node;
+                    }
+                }
+            }
+
+            var (root, min) = FibonacciHeap<int>.MergeRootNodes(rootNodes, Comparer<int>.Default);
+
+            min.Value.Should().Be(minValue);
+            root.Count().Should().Be(numberOfTrees);
+        }
     }
 }
