@@ -3,7 +3,6 @@ mono: none
 dotnet: 2.2.401
 dist: xenial
 script:
- - cd ./Source
  - dotnet restore
  - dotnet build
  - dotnet test
